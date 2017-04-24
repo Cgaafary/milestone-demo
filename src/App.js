@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import 'flexboxgrid/css/flexboxgrid.css';
+import 'material-design-lite/material.css'
+
+// Custom Components
+import StudentList from './components/StudentList';
+import StudentPage from './components/StudentPage';
+
+// Import Fake Data
+import students from './fakedata/students';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Hello!</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <Router>
+      <div>
+        <h2>Choose a student</h2>
+        <StudentList students={students}/>
+        {/*<Route path="/" component={StudentList} students={students}/>*/}
+        <Route path='/user/:id' render={props => <StudentPage {...props} students={students}/>} />
       </div>
+      </Router>
     );
   }
 }
