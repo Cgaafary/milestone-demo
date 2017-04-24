@@ -14,7 +14,11 @@ class MilestoneCard extends Component {
                 <button 
                     className="mdl-button mdl-js-button mdl-button--primary"
                     onClick={this.handleClick}
-                >Close</button>
+                >No</button>
+                <button 
+                    className="mdl-button mdl-js-button mdl-button--primary"
+                    onClick={this.handleClick}
+                >Yes</button>
             </div>
             </div>
         );

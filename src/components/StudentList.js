@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
-// import { Card } from 'material-ui/Card';
 import { Link } from 'react-router-dom';
 
 class StudentList extends Component {

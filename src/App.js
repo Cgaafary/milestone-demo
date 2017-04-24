@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <span><button onClick={this.resetMilestones}>Reset Milestones</button><button><a href="/students">Student List</a></button></span>
+          <span><button onClick={this.resetMilestones}>Reset Milestones</button><button onClick={this.resetMilestones}><Link to="/students">Student List</Link></button></span>
           <Route path='/students' render={props => <StudentList {...props} students={students}/>} />
           <Route path='/user/:id' render={props => <StudentPage {...props} students={students} milestones={this.state.milestones} removeMilestone={this.removeMilestone} />} />
         </div>
