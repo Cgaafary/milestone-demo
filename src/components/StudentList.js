@@ -13,7 +13,7 @@ class StudentList extends Component {
     renderUsers = (users) => (
         users.map(({id, firstName, lastName}) => (
             <Link key={id} to={`/user/${id}`}>
-            <ListItem primaryText={`${firstName} ${lastName}`} />
+                <ListItem primaryText={`${firstName} ${lastName}`} />
             </Link>
             ))
     );

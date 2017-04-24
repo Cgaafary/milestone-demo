@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
+// import StudentHeader from './StudentHeader';
 
 // Import fake milestones
 import milestones from '../fakedata/milestones';
@@ -18,31 +19,30 @@ class StudentPage extends Component {
     }
 
     // Removes a card
-    removeCard = (input) => {
+    removeCard(input) {
         console.log(`The current user's id is ${input}`);
         let milestoneObject = this.getObjectById(input, this.normalizedMilestones);
         let filteredMilestones = this.state.milestones.filter(value => value !== milestoneObject);
-        console.log(this.state.milestones);
-        console.log(milestoneObject);
-        console.log(filteredMilestones);
         this.setState({milestones: filteredMilestones});
     }
 
     // Renders milestone cards with descriptions
-    renderMilestoneCards = (milestones) => (
+    renderMilestoneCards(milestones) { 
+        return (
         milestones.map(({level, description, id}) => (
             <MilestoneCard description={description} level={level} key={id} id={id} handleSubmit={this.removeCard} />
         ))
     );
+    }
 
     // Normalizes the object provided by scaphold.io
-    normalizeNode = (nodeArray) => {
+    normalizeNode (nodeArray) {
         let normalizedObject = nodeArray.map(({node}) => node);
         return normalizedObject;
     }
 
     // Returns a user object given a user array and an id
-    getObjectById = (id, objects) => {
+    getObjectById (id, objects) {
         let arrayOfObjectIds = objects.map(object => object.id);
         let indexOfId = arrayOfObjectIds.indexOf(id);
         return objects[indexOfId];
@@ -54,8 +54,8 @@ class StudentPage extends Component {
 
         return (
             <div>
-            <AppBar title={`${currentUser.firstName} ${currentUser.lastName}`} />
-            <div className="mdl-grid">{this.renderMilestoneCards(this.state.milestones)}</div>
+            <h3>Current student is {currentUser.firstName} {currentUser.lastName}</h3>
+            <div className="mdl-grid mdl-layout__content">{this.renderMilestoneCards(this.props.milestones)}</div>
             </div>
         ); 
     }
