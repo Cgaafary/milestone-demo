@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
 class MilestoneCard extends Component {
-    handleClick = () => {
-        this.props.handleSubmit(this.props.id);
+    handleYesResponse = () => {
+        this.props.handleMilestoneResponse({id: this.props.id, achieved: true});
+    }
+
+    handleNoResponse = () => {
+        this.props.handleMilestoneResponse({id: this.props.id, achieved: false})
     }
 
     render() {
@@ -13,11 +17,11 @@ class MilestoneCard extends Component {
             <div className="milestone-button">
                 <button 
                     className="mdl-button mdl-js-button mdl-button--primary"
-                    onClick={this.handleClick}
+                    onClick={this.handleNoResponse}
                 >No</button>
                 <button 
                     className="mdl-button mdl-js-button mdl-button--primary"
-                    onClick={this.handleClick}
+                    onClick={this.handleYesResponse}
                 >Yes</button>
             </div>
             </div>

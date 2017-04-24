@@ -10,7 +10,7 @@ class StudentPage extends Component {
     renderMilestoneCards(milestones) { 
         return (
         milestones.map(({level, description, id}) => (
-            <MilestoneCard description={description} level={level} key={id} id={id} handleSubmit={this.props.removeMilestone} />
+            <MilestoneCard description={description} level={level} key={id} id={id} handleMilestoneResponse={this.props.handleMilestoneResponse} />
         ))
     );
     }
