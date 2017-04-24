@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
 import 'flexboxgrid/css/flexboxgrid.css';
 import 'material-design-lite/material.css'
@@ -7,6 +7,7 @@ import 'material-design-lite/material.css'
 // Custom Components
 import StudentList from './components/StudentList';
 import StudentPage from './components/StudentPage';
+import { getObjectById } from './customFunctions';
 
 // Import Fake Data
 import students from './fakedata/students';
@@ -17,8 +18,17 @@ class App extends Component {
     super();
     this.normalizedMilestones = this.normalizeNode(milestones);
     this.resetMilestones = this.resetMilestones.bind(this);
+    this.removeMilestone = this.removeMilestone.bind(this);
 
     this.state = { milestones: this.normalizedMilestones }
+  }
+
+  // Removes a milestone
+  removeMilestone(input) {
+      console.log(`The current user's id is ${input}`);
+      let milestoneObject = getObjectById(input, this.normalizedMilestones);
+      let filteredMilestones = this.state.milestones.filter(value => value !== milestoneObject);
+      this.setState({milestones: filteredMilestones});
   }
 
   // Normalizes the object provided by scaphold.io
@@ -30,18 +40,15 @@ class App extends Component {
   // Reset milestones
   resetMilestones () {
     this.setState({ milestones: this.normalizedMilestones })
-    console.log('Reset Milestones Clicked');
-    console.log(this.state.milestones)
   }
 
   render() {
     return (
       <Router>
         <div>
-          <h2>Choose a student</h2>
-          <StudentList students={students}/>
-          <button onClick={this.resetMilestones}>Reset Milestones</button>
-          <Route path='/user/:id' render={props => <StudentPage {...props} students={students} milestones={this.state.milestones}/>} />
+          <span><button onClick={this.resetMilestones}>Reset Milestones</button><button><a href="/students">Student List</a></button></span>
+          <Route path='/students' render={props => <StudentList {...props} students={students}/>} />
+          <Route path='/user/:id' render={props => <StudentPage {...props} students={students} milestones={this.state.milestones} removeMilestone={this.removeMilestone} />} />
         </div>
       </Router>
     );

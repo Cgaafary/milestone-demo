@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { List, ListItem } from 'material-ui/List';
-import { Card } from 'material-ui/Card';
+// import { Card } from 'material-ui/Card';
 import { Link } from 'react-router-dom';
 
 class StudentList extends Component {
@@ -22,11 +22,12 @@ class StudentList extends Component {
         const { students } = this.props;
         
         return(
-        <Card>
+        <div>
+            <h2>Choose a student</h2>
             <List>
                 {this.renderUsers(students)}
             </List>
-        </Card>
+        </div>
         );
     }
 }
