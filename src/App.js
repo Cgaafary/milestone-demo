@@ -8,6 +8,7 @@ import 'material-design-lite/material.css'
 import StudentList from './components/StudentList';
 import StudentPage from './components/StudentPage';
 import { getObjectById } from './customFunctions';
+import { reformatArrayByLevel } from './customFunctions';
 
 // Import Fake Data
 import students from './fakedata/students';
@@ -16,22 +17,27 @@ import milestones from './fakedata/milestones';
 class App extends Component {
   constructor() {
     super();
+
+    // Properties
     this.normalizedMilestones = this.normalizeNode(milestones);
+    this.currentMilestones = reformatArrayByLevel(this.normalizedMilestones);
+
+    // Binding Methods
     this.resetMilestones = this.resetMilestones.bind(this);
     this.handleMilestoneResponse = this.handleMilestoneResponse.bind(this);
 
     this.state = { 
       displayedMilestones: this.normalizedMilestones,
       achievedMilestones: [],
-      rejectedMilestones: []
+      rejectedMilestones: [],
+      currentMilestones: this.currentMilestones[0]
      }
   }
 
   // Removes a milestone
-  handleMilestoneResponse({id, achieved}) {
-      // console.log(`ID for clicked evaluation object: ${id}`);
+  handleMilestoneResponse({id, achieved, evaluatedUser}) {
       let milestoneObject = getObjectById(id, this.normalizedMilestones);
-      let filteredMilestones = this.state.displayedMilestones.filter(value => value !== milestoneObject);
+      let normalizedMilestones = this.state.displayedMilestones.filter(value => value !== milestoneObject);
       var achievedMilestones = this.state.achievedMilestones;
       var rejectedMilestones = this.state.rejectedMilestones;
       
@@ -44,7 +50,7 @@ class App extends Component {
         this.setState(rejectedMilestones)
       }
 
-      this.setState({displayedMilestones: filteredMilestones});
+      this.setState({displayedMilestones: normalizedMilestones});
   }
 
   // Normalizes the object provided by scaphold.io
@@ -55,10 +61,15 @@ class App extends Component {
 
   // Reset milestones
   resetMilestones () {
-    this.setState({ milestones: this.normalizedMilestones })
+    this.setState({ 
+      displayedMilestones: this.normalizedMilestones,
+      achievedMilestones: [],
+      rejectedMilestones: []
+     })
   }
 
   render() {
+    console.log(this.state.currentMilestones);
     return (
       <Router>
         <div>
