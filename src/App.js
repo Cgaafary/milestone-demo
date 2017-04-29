@@ -30,17 +30,20 @@ class App extends Component {
       displayedMilestones: this.currentMilestones[0],
       achievedMilestones: [],
       rejectedMilestones: [],
+      payload: [],
       milestoneIndex: 0,
       achievedAtCurrentLvl: 0,
-      currentLevelLength: this.currentMilestones[0].length
+      currentLevelLength: this.currentMilestones[0].length,
      }
   }
 
   componentDidUpdate() {
-    const { achievedAtCurrentLvl, currentLevelLength } = this.state;
+    const { achievedAtCurrentLvl, currentLevelLength, displayedMilestones, milestoneIndex, payload } = this.state;
     if (achievedAtCurrentLvl === currentLevelLength){
-          console.log('level achieved');
+          console.log(`Level ${milestoneIndex + 1} achieved`);
           this.advanceLevel();
+    } else if (!displayedMilestones.length) {
+      console.log('Submit Payload: ', payload);
     }
   }
 
@@ -48,6 +51,7 @@ class App extends Component {
   handleMilestoneResponse({id, achieved, evaluatedUserId}) {
       var achievedMilestones = this.state.achievedMilestones;
       var rejectedMilestones = this.state.rejectedMilestones;
+      var { payload } = this.state;
 
       // Filters out the submitted milestone evaluated
       let milestoneObject = getObjectById(id, this.normalizedMilestones);
@@ -58,16 +62,19 @@ class App extends Component {
       let { achievedAtCurrentLvl } = this.state;
       // Conditional logic to change state if a milestone is achieved
       if (achieved) {
-        achievedMilestones.push({id, achieved, evaluatedUserId})
+        achievedMilestones.push({id, achieved, evaluatedUserId});
+        payload.push({id, achieved, evaluatedUserId});
         this.setState({
           achievedAtCurrentLvl: achievedAtCurrentLvl + 1,
-          achievedMilestones
+          achievedMilestones,
+          payload
         })
 
         // Handle rejected responses
       } else {
-        rejectedMilestones.push({id, achieved})
-        this.setState(rejectedMilestones)
+        rejectedMilestones.push({id, achieved, evaluatedUserId});
+        payload.push({id, achieved, evaluatedUserId});
+        this.setState({rejectedMilestones, payload})
       }
       
   }
