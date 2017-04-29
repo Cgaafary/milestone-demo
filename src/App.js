@@ -48,13 +48,13 @@ class App extends Component {
   }
 
   // Removes a milestone
-  handleMilestoneResponse({id, achieved, evaluatedUserId}) {
+  handleMilestoneResponse({milestoneId, achieved, evaluatedUserId}) {
       var achievedMilestones = this.state.achievedMilestones;
       var rejectedMilestones = this.state.rejectedMilestones;
       var { payload } = this.state;
 
       // Filters out the submitted milestone evaluated
-      let milestoneObject = getObjectById(id, this.normalizedMilestones);
+      let milestoneObject = getObjectById(milestoneId, this.normalizedMilestones);
       let filteredMilestones = this.state.displayedMilestones.filter(value => value !== milestoneObject);
       this.setState({displayedMilestones: filteredMilestones});
       
@@ -62,8 +62,8 @@ class App extends Component {
       let { achievedAtCurrentLvl } = this.state;
       // Conditional logic to change state if a milestone is achieved
       if (achieved) {
-        achievedMilestones.push({id, achieved, evaluatedUserId});
-        payload.push({id, achieved, evaluatedUserId});
+        achievedMilestones.push({milestoneId, achieved, evaluatedUserId});
+        payload.push({milestoneId, achieved, evaluatedUserId});
         this.setState({
           achievedAtCurrentLvl: achievedAtCurrentLvl + 1,
           achievedMilestones,
@@ -72,8 +72,8 @@ class App extends Component {
 
         // Handle rejected responses
       } else {
-        rejectedMilestones.push({id, achieved, evaluatedUserId});
-        payload.push({id, achieved, evaluatedUserId});
+        rejectedMilestones.push({milestoneId, achieved, evaluatedUserId});
+        payload.push({milestoneId, achieved, evaluatedUserId});
         this.setState({rejectedMilestones, payload})
       }
       
@@ -112,9 +112,8 @@ class App extends Component {
       <Router>
         <div>
           <span>
-            <button onClick={this.resetMilestones}>Reset Milestones</button>
             <button onClick={this.resetMilestones}><Link to="/students">Student List</Link></button>
-            <button onClick={this.advanceLevel}>Advance Level</button>
+            <button onClick={this.resetMilestones}>Reset Milestones</button>
           </span>
           <Route path='/students' render={props => <StudentList {...props} students={students}/>} />
           <Route path='/user/:id' render={props => <StudentPage {...props} students={students} milestones={this.state.displayedMilestones} handleMilestoneResponse={this.handleMilestoneResponse} />} />

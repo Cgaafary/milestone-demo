@@ -5,12 +5,12 @@ import React, { Component } from 'react';
 class MilestoneCard extends Component {
     handleYesResponse = () => {
         let { id, evaluatedUserId } = this.props;
-        this.props.handleMilestoneResponse({id, achieved: true, evaluatedUserId});
+        this.props.handleMilestoneResponse({milestoneId: id, achieved: true, evaluatedUserId});
     }
 
     handleNoResponse = () => {
         let { id, evaluatedUserId } = this.props;
-        this.props.handleMilestoneResponse({id, evaluatedUserId, achieved: false})
+        this.props.handleMilestoneResponse({milestoneId: id, evaluatedUserId, achieved: false})
     }
 
     render() {
