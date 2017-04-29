@@ -8,7 +8,7 @@ import { getObjectById } from '../customFunctions';
 class StudentPage extends Component {
     // Renders milestone cards with descriptions
     renderMilestoneCards(milestones) { 
-        let currentUserId = this.props.match.params.id;
+        var currentUserId = this.props.match.params.id;
         return (
         milestones.map(({level, description, id}) => (
             <MilestoneCard 
@@ -23,10 +23,10 @@ class StudentPage extends Component {
     }
 
     render() {
-        let { students, milestones, match: { params } } = this.props;
-        let currentUserId = params.id;
-        let currentUserObject = getObjectById(currentUserId, students);
-        let { firstName, lastName } = currentUserObject;
+        const { students, milestones, match: { params } } = this.props;
+        const currentUserId = params.id;
+        const currentUserObject = getObjectById(currentUserId, students);
+        const { firstName, lastName } = currentUserObject;
 
         return (
             <div>

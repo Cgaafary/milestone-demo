@@ -25,11 +25,10 @@ class App extends Component {
     this.resetMilestones = this.resetMilestones.bind(this);
     this.handleMilestoneResponse = this.handleMilestoneResponse.bind(this);
     this.advanceLevel = this.advanceLevel.bind(this);
+    this.submitPayload = this.submitPayload.bind(this);
 
     this.state = { 
       displayedMilestones: this.currentMilestones[0],
-      achievedMilestones: [],
-      rejectedMilestones: [],
       payload: [],
       milestoneIndex: 0,
       achievedAtCurrentLvl: 0,
@@ -38,43 +37,38 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    const { achievedAtCurrentLvl, currentLevelLength, displayedMilestones, milestoneIndex, payload } = this.state;
+    const { achievedAtCurrentLvl, currentLevelLength, displayedMilestones, milestoneIndex } = this.state;
     if (achievedAtCurrentLvl === currentLevelLength){
           console.log(`Level ${milestoneIndex + 1} achieved`);
           this.advanceLevel();
     } else if (!displayedMilestones.length) {
-      console.log('Submit Payload: ', payload);
+      this.submitPayload();
     }
   }
 
   // Removes a milestone
   handleMilestoneResponse({milestoneId, achieved, evaluatedUserId}) {
-      var achievedMilestones = this.state.achievedMilestones;
-      var rejectedMilestones = this.state.rejectedMilestones;
       var { payload } = this.state;
+      const evaluatingUserId = 'Add later';
 
       // Filters out the submitted milestone evaluated
-      let milestoneObject = getObjectById(milestoneId, this.normalizedMilestones);
-      let filteredMilestones = this.state.displayedMilestones.filter(value => value !== milestoneObject);
+      const milestoneObject = getObjectById(milestoneId, this.normalizedMilestones);
+      const filteredMilestones = this.state.displayedMilestones.filter(value => value !== milestoneObject);
       this.setState({displayedMilestones: filteredMilestones});
       
-      // Handle milestone responses
-      let { achievedAtCurrentLvl } = this.state;
       // Conditional logic to change state if a milestone is achieved
+      const { achievedAtCurrentLvl } = this.state;
       if (achieved) {
-        achievedMilestones.push({milestoneId, achieved, evaluatedUserId});
-        payload.push({milestoneId, achieved, evaluatedUserId});
+        payload.push({milestoneId, achieved, evaluatedUserId, evaluatingUserId});
         this.setState({
           achievedAtCurrentLvl: achievedAtCurrentLvl + 1,
-          achievedMilestones,
           payload
-        })
+        });
 
         // Handle rejected responses
       } else {
-        rejectedMilestones.push({milestoneId, achieved, evaluatedUserId});
-        payload.push({milestoneId, achieved, evaluatedUserId});
-        this.setState({rejectedMilestones, payload})
+        payload.push({milestoneId, achieved, evaluatedUserId, evaluatingUserId});
+        this.setState({payload});
       }
       
   }
@@ -83,8 +77,7 @@ class App extends Component {
   resetMilestones () {
     this.setState({ 
       displayedMilestones: this.currentMilestones[0],
-      achievedMilestones: [],
-      rejectedMilestones: [],
+      payload: [],
       milestoneIndex: 0,
       achievedAtCurrentLvl: 0,
       currentLevelLength: this.currentMilestones[0].length
@@ -97,7 +90,11 @@ class App extends Component {
     let newIndex = milestoneIndex + 1;
 
     // Exit function if there are no more levels
-    if (!this.currentMilestones[newIndex]) { console.log('No more levels'); return; }
+    if (!this.currentMilestones[newIndex]) { 
+      console.log('Completed all levels');
+      this.submitPayload();
+      return; 
+    }
 
     this.setState({
       displayedMilestones: this.currentMilestones[newIndex],
@@ -105,6 +102,10 @@ class App extends Component {
       currentLevelLength: this.currentMilestones[newIndex].length,
       achievedAtCurrentLvl: 0
     })
+  }
+
+  submitPayload() {
+    console.log('Submit Payload:', this.state.payload);
   }
 
   render() { 

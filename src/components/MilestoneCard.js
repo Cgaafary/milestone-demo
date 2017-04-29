@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
-// const { id, evaluatedUserId, description } = this.props;
-
 class MilestoneCard extends Component {
     handleYesResponse = () => {
-        let { id, evaluatedUserId } = this.props;
-        this.props.handleMilestoneResponse({milestoneId: id, achieved: true, evaluatedUserId});
+        const { id, evaluatedUserId } = this.props;
+        this.props.handleMilestoneResponse({milestoneId: id, evaluatedUserId, achieved: true,});
     }
 
     handleNoResponse = () => {
-        let { id, evaluatedUserId } = this.props;
-        this.props.handleMilestoneResponse({milestoneId: id, evaluatedUserId, achieved: false})
+        const { id, evaluatedUserId } = this.props;
+        this.props.handleMilestoneResponse({milestoneId: id, evaluatedUserId, achieved: false});
     }
 
     render() {
-        let { description, level } = this.props;
+        const { description, level } = this.props;
         return (
             <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp milestone-card">
             <p><strong>Level { level }</strong></p>
