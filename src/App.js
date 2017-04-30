@@ -32,17 +32,17 @@ class App extends Component {
       payload: [],
       milestoneIndex: 0,
       achievedAtCurrentLvl: 0,
-      currentLevelLength: this.currentMilestones[0].length,
+      currentLevelLength: this.currentMilestones[0].length
      }
   }
 
   componentDidUpdate() {
     const { achievedAtCurrentLvl, currentLevelLength, displayedMilestones, milestoneIndex } = this.state;
-    if (achievedAtCurrentLvl === currentLevelLength){
+    if (achievedAtCurrentLvl === currentLevelLength) {
           console.log(`Level ${milestoneIndex + 1} achieved`);
           this.advanceLevel();
     } else if (!displayedMilestones.length) {
-      this.submitPayload();
+          this.submitPayload();
     }
   }
 
@@ -86,8 +86,8 @@ class App extends Component {
 
   // Advance level if all milestones in current level are completed
   advanceLevel () {
-    let { milestoneIndex } = this.state;
-    let newIndex = milestoneIndex + 1;
+    const { milestoneIndex } = this.state;
+    const newIndex = milestoneIndex + 1;
 
     // Exit function if there are no more levels
     if (!this.currentMilestones[newIndex]) { 
