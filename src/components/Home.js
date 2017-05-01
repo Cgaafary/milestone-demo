@@ -61,18 +61,18 @@ class Home extends Component {
   }
 
   // Removes a milestone
-  handleMilestoneResponse({milestoneId, achieved, evaluatedUserId}) {
+  handleMilestoneResponse({milestone, achieved, evaluatedUser}) {
       var { payload, displayedMilestones, achievedAtCurrentLvl } = this.state;
-      const evaluatingUserId = 'Add later';
+      const evaluatingUser = 'Add later';
 
       // Filters out the submitted milestone evaluated
-      const milestoneObject = getObjectById(milestoneId, displayedMilestones);
+      const milestoneObject = getObjectById(milestone, displayedMilestones);
       const filteredMilestones = displayedMilestones.filter(value => value !== milestoneObject);
       this.setState({displayedMilestones: filteredMilestones});
       
       // Conditional logic to change state if a milestone is achieved
       if (achieved) {
-        payload.push({milestoneId, achieved, evaluatedUserId, evaluatingUserId});
+        payload.push({milestone, achieved, evaluatedUser, evaluatingUser});
         this.setState({
           achievedAtCurrentLvl: achievedAtCurrentLvl + 1,
           payload
@@ -80,7 +80,7 @@ class Home extends Component {
 
         // Handle rejected responses
       } else {
-        payload.push({milestoneId, achieved, evaluatedUserId, evaluatingUserId});
+        payload.push({milestone, achieved, evaluatedUser, evaluatingUser});
         this.setState({payload});
       }
       
