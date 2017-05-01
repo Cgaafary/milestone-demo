@@ -7,10 +7,6 @@ import StudentList from './StudentList';
 import StudentPage from './StudentPage';
 import { getObjectById, reformatArrayByLevel } from '../customFunctions';
 
-// Import Fake Data
-// import students from '../fakedata/students';
-// import milestones from '../fakedata/milestones';
-
 // Import real data
 import getMilestones from '../data/queries/getMilestones';
 
@@ -18,9 +14,6 @@ class Home extends Component {
   constructor() {
     super();
 
-    // Properties
-    // this.normalizedMilestones = normalizeNode(milestones);
-    // this.currentMilestones = this.props.data.allMilestones
     // Binding Methods
     this.resetMilestones = this.resetMilestones.bind(this);
     this.handleMilestoneResponse = this.handleMilestoneResponse.bind(this);
