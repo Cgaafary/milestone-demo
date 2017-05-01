@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-// import AppBar from 'material-ui/AppBar';
+import { graphql } from 'react-apollo';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
-import { getObjectById } from '../customFunctions';
+
+// Data Import
+import getUserById from '../data/queries/getUserById';
 
 class StudentPage extends Component {
     // Renders milestone cards with descriptions
@@ -23,18 +25,18 @@ class StudentPage extends Component {
     }
 
     render() {
-        const { students, milestones, match: { params } } = this.props;
-        const currentUserId = params.id;
-        const currentUserObject = getObjectById(currentUserId, students);
-        const { firstName, lastName } = currentUserObject;
-
+        const { loading } = this.props.data;
+        const { milestones } = this.props;
+        if (loading) { return <div>Loading...</div> }
         return (
             <div>
-            <h3>Current student is {firstName} {lastName}</h3>
+            <h3>Current student is {this.props.data.User.fullName}</h3>
             <div className="mdl-grid mdl-layout__content">{this.renderMilestoneCards(milestones)}</div>
             </div>
         ); 
     }
 }
 
-export default StudentPage;
+export default graphql(getUserById, {
+    options: ({match}) => ({ variables: { id: match.params.id }})
+})(StudentPage);
