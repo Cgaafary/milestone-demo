@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 
+// Testing git command linegit 
+
 // Custom Components
 import StudentList from './StudentList';
 import StudentPage from './StudentPage';
