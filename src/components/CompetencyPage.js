@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
-// Import Queries
+// Import Queries and Mutations
 import getCompetencyData from '../data/queries/getCompetencyData';
+import submitEvaluation from '../data/mutations/submitEvaluation';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
@@ -68,7 +69,7 @@ class CompetencyPage extends Component {
 
     handleMilestoneResponse({milestone, achieved, evaluatedUser}) {
         var { payload, displayedMilestones, achievedAtCurrentLvl } = this.state;
-        const evaluatingUser = 'Add later';
+        const evaluatingUser = 'cj256q1c9gd5e0148nqsdz871';
 
         // Filters out the submitted milestone evaluated
         const milestoneObject = getObjectById(milestone, displayedMilestones);
@@ -113,7 +114,23 @@ class CompetencyPage extends Component {
 
     // Submits evaluation data to the server **Pending
     submitPayload() {
-        console.log('Submit Payload:', this.state.payload);
+        const { payload } = this.state;
+        // eslint-disable-next-line
+        payload.map(({achieved, evaluatedUser, evaluatingUser, milestone}) => {
+            this.props.mutate({
+                variables: {
+                    achieved,
+                    evaluatedUserId: evaluatedUser,
+                    evaluatingUserId: evaluatingUser,
+                    milestoneId: milestone
+                }
+            })
+            .then(({ data }) => {
+                console.log('got data', data);
+            }).catch((error) => {
+                console.log('there was an error', error);
+            })
+        });
     }
 
     render() {
@@ -130,6 +147,7 @@ class CompetencyPage extends Component {
     }
 }
 
-export default graphql(getCompetencyData, {
+export default graphql(submitEvaluation)(
+graphql(getCompetencyData, {
     options: ({match}) => ({ variables: { competencyId: match.params.id }})
-})(CompetencyPage);
+})(CompetencyPage));

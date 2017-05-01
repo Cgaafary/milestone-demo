@@ -6,7 +6,7 @@ import { graphql } from 'react-apollo';
 import CompetencyList from './CompetencyList';
 import CompetencyPage from './CompetencyPage';
 
-// Data Import
+// GraphQL queries and mutations
 import getUserById from '../data/queries/getUserById';
 
 class StudentPage extends Component {
