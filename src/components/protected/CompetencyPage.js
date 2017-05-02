@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
 // Import Queries and Mutations
-import getCompetencyData from '../data/queries/getCompetencyData';
-import submitEvaluation from '../data/mutations/submitEvaluation';
+import getCompetencyData from '../../data/queries/getCompetencyData';
+import submitEvaluation from '../../data/mutations/submitEvaluation';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
-import { getObjectById, reformatArrayByLevel } from '../customFunctions';
+import { getObjectById, reformatArrayByLevel } from '../../customFunctions';
 
 class CompetencyPage extends Component {
     constructor() {

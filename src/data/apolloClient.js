@@ -17,5 +17,6 @@ networkInterface.use([{
 }])
 
 export const client = new ApolloClient({
-  networkInterface: networkInterface
+  networkInterface: networkInterface,
+  dataIdFromObject: o => o.id
 });

@@ -1,50 +1,62 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { graphql } from 'react-apollo';
 
 // import components
-import StudentList from './StudentList';
-import StudentPage from './StudentPage';
-import Header from './Header';
-import SignIn from './SignIn';
+import Public from './public/Public';
+import ProtectedComponents from './protected/ProtectedComponents';
+
+// Queries and Mutations
+import getCurrentUser from '../data/queries/getCurrentUser';
 
 class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentUser: {id: '', fullName: '', userType: ''},
-      signedIn: false
+    this.state = { loggedIn: false }
+
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+
+  handleSignIn() {
+    this.setState({loggedIn: true})
+    this.props.history.replace('/');
+  }
+
+  handleSignOut() {
+    this.setState({loggedIn: false})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { loading, user } = nextProps.data;
+    
+    if (loading) { 
+      return; 
+    } else if (!user) { 
+      this.setState({ isAuthenticated: false })
+      return; 
+    }
+    else {
+      this.setState({ isAuthenticated: true })
+    }
+  }
+
+
+  render() {
+    if (!this.state.loggedIn) {
+      return(
+      <div>
+        <button onClick={this.handleSignIn}>Test Sign in</button>
+        <Public handleSignIn={this.handleSignIn}/>
+      </div>
+      );
     }
 
-    this.signinUser = this.signinUser.bind(this);
-  }
-
-  signinUser(currentUser) {
-    this.setState({
-      currentUser,
-      signedIn: true
-    })
-  }
-
-  componentDidUpdate() {
-    const { currentUser } = this.state;
-    const { id, fullName, userType } = currentUser
-    console.log(id, fullName, userType);
-  }
-
-
-
-  render() { 
     return (
         <div>
-          <Switch>
-            <Route exact path="/" component={Header} />
-            <Route path="/signin" render={props => <SignIn {...props} signinUser={this.signinUser} />} />
-          </Switch>
-          <Route path="/students" component={StudentList} />
-          <Route path="/student/:id" component={StudentPage} />
+         <ProtectedComponents handleSignOut={this.handleSignOut} />
         </div>
     );
   }
 }
-export default Main;
+export default graphql(getCurrentUser)(Main);

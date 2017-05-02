@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+// import { Redirect } from 'react-router-dom';
 
-import signinUser from '../data/mutations/signinUser';
+import signinUser from '../../data/mutations/signinUser';
 
 class SignIn extends Component {
     constructor(props) {
@@ -30,12 +31,10 @@ class SignIn extends Component {
                 email, password
             }
         }).then(({ data }) => {
-            const { token, user } = data.signinUser;
-
+            const { token } = data.signinUser;
             localStorage.setItem('token', token);
-            console.log('Successfully stored token: ', localStorage.getItem('token'));
-
-            this.props.signinUser(user);
+            this.props.handleSignIn();
+            this.props.history.replace("/");
 
         }).catch((error) => {
             console.log('There was an error: ', error);

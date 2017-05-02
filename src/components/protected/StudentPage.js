@@ -7,7 +7,7 @@ import CompetencyList from './CompetencyList';
 import CompetencyPage from './CompetencyPage';
 
 // GraphQL queries and mutations
-import getUserById from '../data/queries/getUserById';
+import getUserById from '../../data/queries/getUserById';
 
 class StudentPage extends Component {
     render() {
