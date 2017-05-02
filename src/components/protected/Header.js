@@ -9,13 +9,8 @@ class Header extends Component {
 
     handleSignOut() {
         localStorage.removeItem('token');
-        console.log('Signed out');
         this.props.handleSignOut();
-        this.props.history.replace("/");
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log("New Authentication: ", nextProps.isAuthenticated);
+        // this.props.history.replace("/");
     }
 
     render() {

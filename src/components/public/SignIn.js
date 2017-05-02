@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-// import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import signinUser from '../../data/mutations/signinUser';
+import getCurrentUser from '../../data/queries/getCurrentUser';
 
 class SignIn extends Component {
     constructor(props) {
@@ -27,6 +28,9 @@ class SignIn extends Component {
 
         const { email, password } = this.state;
         this.props.mutate({
+            refetchQueries: [{
+                query: getCurrentUser
+            }],
             variables: {
                 email, password
             }
@@ -62,4 +66,4 @@ class SignIn extends Component {
     }
 }
 
-export default graphql(signinUser)(SignIn);
+export default withRouter(graphql(signinUser)(SignIn));

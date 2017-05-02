@@ -27,18 +27,18 @@ class Main extends Component {
     this.setState({loggedIn: false})
   }
 
+  // The problem with auth has been identified to this function
   componentWillReceiveProps(nextProps) {
     const { loading, user } = nextProps.data;
     
     if (loading) { 
-      return; 
-    } else if (!user) { 
-      this.setState({ isAuthenticated: false })
-      return; 
+      return;
+    } 
+
+    if (user) {
+      this.setState({ loggedIn: true })
     }
-    else {
-      this.setState({ isAuthenticated: true })
-    }
+
   }
 
 
@@ -46,17 +46,16 @@ class Main extends Component {
     if (!this.state.loggedIn) {
       return(
       <div>
-        <button onClick={this.handleSignIn}>Test Sign in</button>
         <Public handleSignIn={this.handleSignIn}/>
       </div>
       );
-    }
-
-    return (
+    } else {
+      return (
         <div>
          <ProtectedComponents handleSignOut={this.handleSignOut} />
         </div>
-    );
+      );
+    }
   }
 }
 export default graphql(getCurrentUser)(Main);
