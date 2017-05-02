@@ -25,6 +25,7 @@ class CompetencyPage extends Component {
             payload: []
         }
     }
+
     // Add asynchronous data to state when loaded
     componentWillReceiveProps(nextProps) {
         const { loading } = nextProps.data;
@@ -37,7 +38,7 @@ class CompetencyPage extends Component {
             displayedMilestones: milestonesByLevel[0],
             currentLevelLength: milestonesByLevel[0].length
         })
-    } 
+    }  
 
     // Conditional logic after each render.
     // Advances to the next Level if all responses are Yes in the current level, submits payload if false
