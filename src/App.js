@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom
 
 // Import Components
 import Main from './components/Main';
-// import StudentList from './components/StudentList';
-// import StudentPage from './components/StudentPage';
 
 // Import Functions
 import './App.css';

@@ -6,6 +6,7 @@ mutation SigninUser ($email: String!, $password: String!){
     user {
       id
       fullName
+      userType
     }
     token
   }
