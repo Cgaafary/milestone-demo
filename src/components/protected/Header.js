@@ -8,16 +8,16 @@ class Header extends Component {
     }
 
     handleSignOut() {
-        localStorage.removeItem('token');
-        this.props.handleSignOut();
-        // this.props.history.replace("/");
+        this.props.handleSignOut(); 
     }
 
     render() {
+        const { fullName } = this.props.currentUser
             return (
                 <div>
                     <Link to='/students'><button>Student List</button></Link>
                     <button onClick={this.handleSignOut}>Sign out</button>
+                    <p>Welcome {fullName}</p>
                 </div>
             );
     }

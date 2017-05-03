@@ -9,7 +9,7 @@ class ProtectedComponents extends Component {
     render() {
         return (
         <div>
-            <Route path="/" render={props => <Header {...props} handleSignOut={this.props.handleSignOut} />} />
+            <Route path="/" render={props => <Header {...props} handleSignOut={this.props.handleSignOut} currentUser={this.props.currentUser}/>} />
             <Route path="/students" component={StudentList} />
             <Route path="/student/:id" component={StudentPage} />
         </div>

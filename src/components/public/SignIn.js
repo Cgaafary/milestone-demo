@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
 
 import signinUser from '../../data/mutations/signinUser';
 import getCurrentUser from '../../data/queries/getCurrentUser';
@@ -35,10 +34,9 @@ class SignIn extends Component {
                 email, password
             }
         }).then(({ data }) => {
-            const { token } = data.signinUser;
+            const { token, user } = data.signinUser;
             localStorage.setItem('token', token);
-            this.props.handleSignIn();
-            this.props.history.replace("/");
+            this.props.handleSignIn(user);
 
         }).catch((error) => {
             console.log('There was an error: ', error);
@@ -66,4 +64,4 @@ class SignIn extends Component {
     }
 }
 
-export default withRouter(graphql(signinUser)(SignIn));
+export default graphql(signinUser)(SignIn);

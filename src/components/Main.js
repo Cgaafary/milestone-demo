@@ -12,19 +12,23 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loggedIn: false }
+    this.state = { 
+      loggedIn: false,
+      currentUser: {}
+     }
 
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
   }
 
-  handleSignIn() {
-    this.setState({loggedIn: true})
+  handleSignIn(user) {
+    this.setState({loggedIn: true, currentUser: user})
     this.props.history.replace('/');
   }
 
   handleSignOut() {
-    this.setState({loggedIn: false})
+    localStorage.removeItem('token');
+    location.reload();
   }
 
   // The problem with auth has been identified to this function
@@ -36,7 +40,7 @@ class Main extends Component {
     } 
 
     if (user) {
-      this.setState({ loggedIn: true })
+      this.setState({ loggedIn: true, currentUser: user })
     }
 
   }
@@ -52,7 +56,7 @@ class Main extends Component {
     } else {
       return (
         <div>
-         <ProtectedComponents handleSignOut={this.handleSignOut} />
+         <ProtectedComponents handleSignOut={this.handleSignOut} currentUser={this.state.currentUser}/>
         </div>
       );
     }
