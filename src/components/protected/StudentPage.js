@@ -11,6 +11,7 @@ import getUserById from '../../data/queries/getUserById';
 
 class StudentPage extends Component {
     render() {
+        console.log(this.props)
         const { loading, User: student } = this.props.data;
         if (loading) { return <div>Loading...</div> }
         const {match} = this.props;
@@ -18,7 +19,7 @@ class StudentPage extends Component {
             <div>
             <h4>Evaluating {student.fullName}</h4>
             <Route path={`${match.url}/competencies`} component={CompetencyList} />
-            <Route path={`${match.url}/competency/:id`} render={props => <CompetencyPage {...props} evaluatedUser={student.id}/>} />
+            <Route path={`${match.url}/competency/:id`} render={props => <CompetencyPage {...props} evaluatedUser={student.id} evaluatingUser={this.props.currentUser.id}/>} />
             </div>
         ); 
     }

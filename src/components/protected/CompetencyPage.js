@@ -61,16 +61,15 @@ class CompetencyPage extends Component {
                     level={level}
                     key={id} 
                     id={id}
-                    evaluatedUser={this.props.evaluatedUser}
                     handleMilestoneResponse={this.handleMilestoneResponse}
                 />
             ))
         );
     }
 
-    handleMilestoneResponse({milestone, achieved, evaluatedUser}) {
+    handleMilestoneResponse({milestone, achieved}) {
         var { payload, displayedMilestones, achievedAtCurrentLvl } = this.state;
-        const evaluatingUser = 'cj256q1c9gd5e0148nqsdz871';
+        const { evaluatingUser, evaluatedUser } = this.props;
 
         // Filters out the submitted milestone evaluated
         const milestoneObject = getObjectById(milestone, displayedMilestones);

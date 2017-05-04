@@ -28,6 +28,7 @@ class Main extends Component {
 
   handleSignOut() {
     localStorage.removeItem('token');
+    this.props.history.replace('/');
     location.reload();
   }
 
