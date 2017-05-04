@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { client } from './data/apolloClient';
-import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // Import Components
 import Main from './components/Main';
-// import StudentList from './components/StudentList';
-// import StudentPage from './components/StudentPage';
 
 // Import Functions
 import './App.css';
@@ -17,7 +15,7 @@ class App extends Component {
   render() { 
     return (
       <ApolloProvider client={client}>
-        <Router history={browserHistory}>
+        <Router>
           <Route path="/" component={Main}/>
         </Router>
       </ApolloProvider>

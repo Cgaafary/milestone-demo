@@ -5,6 +5,10 @@ mutation SubmitEvaluation ($achieved: Boolean!, $evaluatedUserId: ID!, $evaluati
   createEvaluation(achieved: $achieved, evaluatedUserId: $evaluatedUserId, evaluatingUserId: $evaluatingUserId, milestoneId: $milestoneId) {
     id
     achieved
+    milestone {
+      level
+      description
+    }
   }
 }
 `;

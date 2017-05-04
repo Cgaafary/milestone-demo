@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
 // Import Queries and Mutations
-import getCompetencyData from '../data/queries/getCompetencyData';
-import submitEvaluation from '../data/mutations/submitEvaluation';
+import getCompetencyData from '../../data/queries/getCompetencyData';
+import submitEvaluation from '../../data/mutations/submitEvaluation';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
-import { getObjectById, reformatArrayByLevel } from '../customFunctions';
+import { getObjectById, reformatArrayByLevel } from '../../customFunctions';
 
 class CompetencyPage extends Component {
     constructor() {
@@ -25,6 +25,7 @@ class CompetencyPage extends Component {
             payload: []
         }
     }
+
     // Add asynchronous data to state when loaded
     componentWillReceiveProps(nextProps) {
         const { loading } = nextProps.data;
@@ -37,7 +38,7 @@ class CompetencyPage extends Component {
             displayedMilestones: milestonesByLevel[0],
             currentLevelLength: milestonesByLevel[0].length
         })
-    } 
+    }  
 
     // Conditional logic after each render.
     // Advances to the next Level if all responses are Yes in the current level, submits payload if false
@@ -60,16 +61,15 @@ class CompetencyPage extends Component {
                     level={level}
                     key={id} 
                     id={id}
-                    evaluatedUser={this.props.evaluatedUser}
                     handleMilestoneResponse={this.handleMilestoneResponse}
                 />
             ))
         );
     }
 
-    handleMilestoneResponse({milestone, achieved, evaluatedUser}) {
+    handleMilestoneResponse({milestone, achieved}) {
         var { payload, displayedMilestones, achievedAtCurrentLvl } = this.state;
-        const evaluatingUser = 'cj256q1c9gd5e0148nqsdz871';
+        const { evaluatingUser, evaluatedUser } = this.props;
 
         // Filters out the submitted milestone evaluated
         const milestoneObject = getObjectById(milestone, displayedMilestones);

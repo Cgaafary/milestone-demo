@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { withRouter, Link } from 'react-router-dom';
 
-import getAllCompetencies from '../data/queries/getAllCompetencies';
+import getAllCompetencies from '../../data/queries/getAllCompetencies';
 
 class CompetencyList extends Component {
     constructor() {

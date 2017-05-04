@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
-import getStudents from '../data/queries/getStudents';
+
+// Queries and Mutations;
+import getStudents from '../../data/queries/getStudents';
 
 class StudentList extends Component {
     constructor() {
