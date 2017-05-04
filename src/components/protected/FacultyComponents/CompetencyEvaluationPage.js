@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
 // Import Queries and Mutations
-import getCompetencyData from '../../data/queries/getCompetencyData';
-import submitEvaluation from '../../data/mutations/submitEvaluation';
+import getCompetencyData from '../../../data/queries/getCompetencyData';
+import submitEvaluation from '../../../data/mutations/submitEvaluation';
 
 // Custom Components
 import MilestoneCard from './MilestoneCard';
-import { getObjectById, reformatArrayByLevel } from '../../customFunctions';
+import { getObjectById, reformatArrayByLevel } from '../../../customFunctions';
 
-class CompetencyPage extends Component {
+class CompetencyEvaluationPage extends Component {
     constructor() {
         super();
 
@@ -150,4 +150,4 @@ class CompetencyPage extends Component {
 export default graphql(submitEvaluation)(
 graphql(getCompetencyData, {
     options: ({match}) => ({ variables: { competencyId: match.params.id }})
-})(CompetencyPage));
+})(CompetencyEvaluationPage));
