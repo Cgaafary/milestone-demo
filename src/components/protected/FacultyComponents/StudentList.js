@@ -11,11 +11,11 @@ class StudentList extends Component {
         this.renderUsers = this.renderUsers.bind(this);
     }
 
-    renderUsers = (users) => (
-        users.map(({id, fullName}) => (
+    renderUsers(users) {
+        return users.map(({id, fullName}) => (
             <li key={id}><Link to={`/student/${id}/competencies`}>{fullName}</Link></li>
             ))
-    );
+    };
 
     render() {
         const { loading, allUsers: students} = this.props.data;

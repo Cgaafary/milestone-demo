@@ -10,11 +10,11 @@ class CompetencyList extends Component {
         this.renderCompetencyList = this.renderCompetencyList.bind(this);
     }
 
-    renderCompetencyList = (competencies, url) => (
-        competencies.map(({id, title}) => (
+    renderCompetencyList(competencies, url) {
+       return competencies.map(({id, title}) => (
                 <li key={id}><Link to={`${url}/${id}`}>{title}</Link></li>
             ))
-    );
+    };
 
     render() {
         const { loading, allCompetencies } = this.props.data;
