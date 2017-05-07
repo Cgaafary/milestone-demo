@@ -9,6 +9,10 @@ import submitEvaluation from '../../../data/mutations/submitEvaluation';
 import MilestoneCard from './MilestoneCard';
 import { getObjectById, reformatArrayByLevel } from '../../../customFunctions';
 
+@graphql(submitEvaluation)
+@graphql(getCompetencyData, {
+    options: ({match}) => ({ variables: { competencyId: match.params.id }})
+})
 class CompetencyEvaluationPage extends Component {
     constructor() {
         super();
@@ -38,7 +42,7 @@ class CompetencyEvaluationPage extends Component {
             displayedMilestones: milestonesByLevel[0],
             currentLevelLength: milestonesByLevel[0].length
         })
-    }  
+    }
 
     // Conditional logic after each render.
     // Advances to the next Level if all responses are Yes in the current level, submits payload if false
@@ -53,13 +57,13 @@ class CompetencyEvaluationPage extends Component {
     }
 
      // Renders milestone cards with descriptions
-    renderMilestoneCards(milestones) { 
+    renderMilestoneCards(milestones) {
         return (
             milestones.map(({level, description, id}) => (
-                <MilestoneCard 
-                    description={description} 
+                <MilestoneCard
+                    description={description}
                     level={level}
-                    key={id} 
+                    key={id}
                     id={id}
                     handleMilestoneResponse={this.handleMilestoneResponse}
                 />
@@ -75,7 +79,7 @@ class CompetencyEvaluationPage extends Component {
         const milestoneObject = getObjectById(milestone, displayedMilestones);
         const filteredMilestones = displayedMilestones.filter(value => value !== milestoneObject);
         this.setState({displayedMilestones: filteredMilestones});
-        
+
         // Conditional logic to change state if a milestone is achieved
         if (achieved) {
             payload.push({milestone, achieved, evaluatedUser, evaluatingUser});
@@ -89,7 +93,7 @@ class CompetencyEvaluationPage extends Component {
             payload.push({milestone, achieved, evaluatedUser, evaluatingUser});
             this.setState({payload});
         }
-        
+
     }
 
      // Advance level if all milestones in current level are completed
@@ -98,10 +102,10 @@ class CompetencyEvaluationPage extends Component {
         const newIndex = milestoneIndex + 1;
 
         // Exit function if there are no more levels
-        if (!currentMilestones[newIndex]) { 
+        if (!currentMilestones[newIndex]) {
             console.log('Completed all levels');
             this.submitPayload();
-            return; 
+            return;
         }
 
         this.setState({
@@ -136,7 +140,7 @@ class CompetencyEvaluationPage extends Component {
     render() {
         const {loading, Competency} = this.props.data
         if(loading) {return <div>Loading...</div>}
-    
+
         const {title} = Competency
         return (
             <div>
@@ -147,7 +151,5 @@ class CompetencyEvaluationPage extends Component {
     }
 }
 
-export default graphql(submitEvaluation)(
-graphql(getCompetencyData, {
-    options: ({match}) => ({ variables: { competencyId: match.params.id }})
-})(CompetencyEvaluationPage));
+export default
+CompetencyEvaluationPage;

@@ -8,7 +8,6 @@ import Main from './components/Main';
 
 // Import Functions
 import './App.css';
-import 'material-design-lite/material.css'
 
 class App extends Component {
   render() {

@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo';
 // Queries and Mutations;
 import getStudents from '../../../data/queries/getStudents';
 
+@graphql(getStudents)
 class StudentList extends Component {
     constructor() {
         super();
@@ -21,7 +22,7 @@ class StudentList extends Component {
         const { loading, allUsers: students} = this.props.data;
 
         if (loading) { return <div>Loading...</div>}
-    
+
         return(
         <div>
             <h2>Choose a student</h2>
@@ -32,4 +33,4 @@ class StudentList extends Component {
 }
 
 
-export default graphql(getStudents)(StudentList);
+export default StudentList;
