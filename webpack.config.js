@@ -1,9 +1,10 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var config = {
-  context: __dirname + '/src', // `__dirname` is root of project and `src` is source
+module.exports = {
+  context: __dirname, // `__dirname` is root of project and `src` is source
   entry: {
-    app: './index.js',
+    app: './src/index.js',
   },
   output: {
     path: __dirname + '/dist', // `dist` is the destination
@@ -14,17 +15,17 @@ var config = {
         {
             test: /\.js$/,
             exclude: /node_modules/,
-            use: [{
-                loader: 'babel-loader',
-                options: { presets: ['es2015', 'react'] }
-            }]
+            use: 'babel-loader'
         },
         {
             test: /\.css$/,
             use: ['style-loader', 'css-loader']
         }
       ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html'
+    })
+  ]
 };
-
-module.exports = config;
