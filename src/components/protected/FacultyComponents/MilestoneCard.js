@@ -1,35 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class MilestoneCard extends Component {
-    handleYesResponse = () => {
+export default function MilestoneCard(props) {
+    const { description, level } = props;
+    function handleYesResponse() {
+        const { id } = props;
+        props.handleMilestoneResponse({milestone: id, achieved: true,});
+    }
+
+    function handleNoResponse() {
         const { id } = this.props;
-        this.props.handleMilestoneResponse({milestone: id, achieved: true,});
+        props.handleMilestoneResponse({milestone: id, achieved: false});
     }
 
-    handleNoResponse = () => {
-        const { id } = this.props;
-        this.props.handleMilestoneResponse({milestone: id, achieved: false});
-    }
-
-    render() {
-        const { description, level } = this.props;
-        return (
-            <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp milestone-card">
-            <p><strong>Level { level }</strong></p>
-            <p>{description}</p>
-            <div className="milestone-button">
-                <button 
-                    className="mdl-button mdl-js-button mdl-button--primary"
-                    onClick={this.handleNoResponse}
-                >No</button>
-                <button 
-                    className="mdl-button mdl-js-button mdl-button--primary"
-                    onClick={this.handleYesResponse}
-                >Yes</button>
-            </div>
-            </div>
-        );
-    }
+    return (
+        <div className="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp milestone-card">
+        <p><strong>Level { level }</strong></p>
+        <p>{description}</p>
+        <div className="milestone-button">
+            <button
+                className="mdl-button mdl-js-button mdl-button--primary"
+                onClick={handleNoResponse}
+            >No</button>
+            <button
+                className="mdl-button mdl-js-button mdl-button--primary"
+                onClick={handleYesResponse}
+            >Yes</button>
+        </div>
+        </div>
+    );
 }
 
-export default MilestoneCard;
+// export default MilestoneCard;
