@@ -9,14 +9,15 @@ import submitEvaluation from '../../../data/mutations/submitEvaluation';
 import MilestoneCard from './MilestoneCard';
 import { getObjectById, reformatArrayByLevel } from '../../../customFunctions';
 
-@graphql(submitEvaluation)
-@graphql(getCompetencyData, {
+const config = {
     options: ({match}) => ({ variables: { competencyId: match.params.id }})
-})
-class CompetencyEvaluationPage extends Component {
-    constructor() {
-        super();
+}
 
+@graphql(submitEvaluation)
+@graphql(getCompetencyData, config)
+class CompetencyEvaluationPage extends Component {
+    constructor(props) {
+        super(props);
         // Bind functions that are passed via props
         this.handleMilestoneResponse = this.handleMilestoneResponse.bind(this);
 
@@ -151,5 +152,4 @@ class CompetencyEvaluationPage extends Component {
     }
 }
 
-export default
-CompetencyEvaluationPage;
+export default CompetencyEvaluationPage;

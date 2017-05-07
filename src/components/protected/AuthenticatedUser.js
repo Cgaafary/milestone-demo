@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Header from './Header';
 import FacultyOnly from './FacultyComponents/FacultyOnly';
 import StudentsOnly from './StudentComponents/StudentsOnly';
 
-class AuthenticatedUser extends Component {
-    conditionallyRenderComponents() {
-        const { currentUser } = this.props;
+const AuthenticatedUser = (props) => {
+    const conditionallyRenderComponents = () => {
+        const { currentUser } = props;
         const { userType } = currentUser;
 
         if (userType === "FACULTY") {
-            return <FacultyOnly {...this.props} />
+            return <FacultyOnly {...props} />
         }
-        else { 
+        else {
             return <StudentsOnly />}
         }
 
-    render() {
-        return (
+    return (
         <div>
-            <Route path="/" render={props => <Header {...props} {...this.props}/>} />
-            {this.conditionallyRenderComponents()}
+            <Route path="/" render={routeProps => <Header {...routeProps} {...props} />} />
+            {conditionallyRenderComponents()}
         </div>
         );
-    }
 }
 
 export default AuthenticatedUser;

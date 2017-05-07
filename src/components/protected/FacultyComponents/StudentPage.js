@@ -9,9 +9,11 @@ import CompetencyEvaluationPage from './CompetencyEvaluationPage';
 // GraphQL queries and mutations
 import getUserById from '../../../data/queries/getUserById';
 
-@graphql(getUserById, {
+const config = {
     options: ({match}) => ({ variables: { id: match.params.id }})
-})
+}
+
+@graphql(getUserById, config)
 class StudentPage extends Component {
     render() {
         const { loading, User: student } = this.props.data;
