@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { client } from './data/apolloClient';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -10,12 +11,12 @@ import Main from './components/Main';
 import './App.css';
 import 'material-design-lite/material.css'
 
-class App extends Component {
+class App extends React.Component<Props, State> {
   render() { 
     return (
       <ApolloProvider client={client}>
         <Router>
-          <Route path="/" component={Main}/>
+          <Route path="/" component={Main}/> 
         </Router>
       </ApolloProvider>
     );
