@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
@@ -9,10 +10,14 @@ import AuthenticatedUser from './protected/AuthenticatedUser';
 import getCurrentUser from '../data/queries/getCurrentUser';
 
 class Main extends Component {
-  constructor(props) {
+  state: {loggedIn: bool, currentUser: {id?: string, userType?: string, fullName?: string}}
+  handleSignIn: Function;
+  handleSignOut: Function;
+
+  constructor(props: Object) {
     super(props);
 
-    this.state = { 
+    this.state = {
       loggedIn: false,
       currentUser: {}
      }
@@ -35,10 +40,10 @@ class Main extends Component {
   // The problem with auth has been identified to this function
   componentWillReceiveProps(nextProps) {
     const { loading, user } = nextProps.data;
-    
-    if (loading) { 
+
+    if (loading) {
       return;
-    } 
+    }
 
     if (user) {
       this.setState({ loggedIn: true, currentUser: user })
