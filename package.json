@@ -14,9 +14,11 @@
     "redux-form": "^6.6.3"
   },
   "devDependencies": {
+    "flow-bin": "^0.45.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
+    "flow": "flow",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
