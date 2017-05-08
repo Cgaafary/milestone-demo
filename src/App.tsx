@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { client } from './data/apolloClient';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -8,15 +8,14 @@ import Main from './components/Main';
 
 // Import Functions
 import './App.css';
-import 'flexboxgrid/css/flexboxgrid.css';
 import 'material-design-lite/material.css'
 
-class App extends Component {
+class App extends React.Component<{}, {}> {
   render() { 
     return (
       <ApolloProvider client={client}>
         <Router>
-          <Route path="/" component={Main}/>
+          <Route path="/" component={Main}/> 
         </Router>
       </ApolloProvider>
     );
