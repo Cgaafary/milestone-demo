@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 
 // Queries and Mutations;
-import getStudents from '../../../data/queries/getStudents';
+import getStudents from '../../data/queries/getStudents';
 
 class StudentList extends Component {
     constructor() {

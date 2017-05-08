@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 
 // import components
 import Public from './public/Public';
-import AuthenticatedUser from './protected/AuthenticatedUser';
+import ProtectedComponents from './protected/ProtectedComponents';
 
 // Queries and Mutations
 import getCurrentUser from '../data/queries/getCurrentUser';
@@ -53,8 +53,7 @@ class Main extends Component {
 
 
   render() {
-    const { loggedIn, currentUser } = this.state;
-    if (!loggedIn) {
+    if (!this.state.loggedIn) {
       return(
       <div>
         <Public handleSignIn={this.handleSignIn}/>
@@ -63,7 +62,7 @@ class Main extends Component {
     } else {
       return (
         <div>
-         <AuthenticatedUser handleSignOut={this.handleSignOut} currentUser={currentUser}/>
+         <ProtectedComponents handleSignOut={this.handleSignOut} currentUser={this.state.currentUser}/>
         </div>
       );
     }

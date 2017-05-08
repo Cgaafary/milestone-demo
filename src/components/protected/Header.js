@@ -12,23 +12,14 @@ class Header extends Component {
     }
 
     render() {
-        const { fullName, userType } = this.props.currentUser
-            if (userType === "FACULTY") {
-                return (
-                    <div>
-                        <Link to='/'><button>Student List</button></Link>
-                        <button onClick={this.handleSignOut}>Sign out</button>
-                        <p>Welcome {fullName}</p>
-                    </div>
-                );
-            } else {
-                return (
-                    <div>
-                        <button onClick={this.handleSignOut}>Sign out</button>
-                        <p>Welcome {fullName}</p>
-                    </div>
-                );
-            }
+        const { fullName } = this.props.currentUser
+            return (
+                <div>
+                    <Link to='/students'><button>Student List</button></Link>
+                    <button onClick={this.handleSignOut}>Sign out</button>
+                    <p>Welcome {fullName}</p>
+                </div>
+            );
     }
 }
 
