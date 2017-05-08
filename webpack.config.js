@@ -1,9 +1,10 @@
 var webpack = require('webpack');
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var config = {
-  context: __dirname + '/src', // `__dirname` is root of project and `src` is source
+module.exports = {
   entry: {
-    app: './index.tsx',
+    app: './src/index.js',
   },
 
   devtool: "source-map",
@@ -13,17 +14,29 @@ var config = {
   },
 
   output: {
-    path: __dirname + '/dist', // `dist` is the destination
+    path: path.join(__dirname, '/dist'), // `dist` is the destination
     filename: 'bundle.js',
   },
 
+  // devServer: {
+  //   contentBase: path.join(__dirname, "dist"),
+  //   compress: true,
+  //   port: 3000
+  // },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: './src/index.html'
+    })
+  ],
+
   module: {
       rules: [
-        { 
-          test: /\.tsx?$/, 
-          exclude: /node_modules/,
-          use: ['babel-loader','ts-loader']
-        },
+        // { 
+        //     test: /\.tsx?$/, 
+        //     exclude: /node_modules/,
+        //     use: ['babel-loader','ts-loader']
+        // },
         {
             test: /\.jsx?$/,
             exclude: /node_modules/,
@@ -36,5 +49,3 @@ var config = {
       ]
   },
 };
-
-module.exports = config;
