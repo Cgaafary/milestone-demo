@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "module": "es2015",
-        "target": "esnext",
+        "module": "commonjs",
+        "target": "es6",
         "outDir": "./dist/",
-        "allowSyntheticDefaultImports": true,
+        "strict": true,
         "allowJs": true,
         "sourceMap": true,
         "noImplicitAny": false,

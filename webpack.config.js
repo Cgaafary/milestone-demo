@@ -9,7 +9,7 @@ var config = {
   devtool: "source-map",
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: ["*", ".ts", ".tsx", ".js", ".json"]
   },
 
   output: {
@@ -20,13 +20,12 @@ var config = {
   module: {
       rules: [
         { 
-          test: /\.tsx$/, 
-          use: ['babel-loader','awesome-typescript-loader']
+          test: /\.tsx?$/, 
+          exclude: /node_modules/,
+          use: ['babel-loader','ts-loader']
         },
-        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-        { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
         {
-            test: /\.js$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/,
             use: 'babel-loader'
         },
@@ -36,10 +35,6 @@ var config = {
         }
       ]
   },
-  externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
 };
 
 module.exports = config;

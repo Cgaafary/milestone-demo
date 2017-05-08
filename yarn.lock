@@ -95,9 +95,9 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
-apollo-client@^1.0.2:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.1.1.tgz#b5fc0b92ca16ac3adcab4cf19ddb871ccfa65652"
+apollo-client@^1.1.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.2.2.tgz#5ec656bf19197ebd77156c58d2e0e765bef648a7"
   dependencies:
     graphql "^0.9.3"
     graphql-anywhere "^3.0.1"
@@ -211,18 +211,6 @@ autoprefixer@^6.3.1:
     num2fraction "^1.2.2"
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
-
-awesome-typescript-loader@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.1.3.tgz#7eb41dfb136c2ea0e099bef038dc70c45f810223"
-  dependencies:
-    colors "^1.1.2"
-    enhanced-resolve "^3.1.0"
-    loader-utils "^1.1.0"
-    lodash "^4.17.4"
-    mkdirp "^0.5.1"
-    object-assign "^4.1.1"
-    source-map-support "^0.4.15"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -988,7 +976,7 @@ colormin@^1.0.5:
     css-color-names "0.0.4"
     has "^1.0.1"
 
-colors@^1.1.2, colors@~1.1.2:
+colors@^1.0.3, colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
 
@@ -1324,7 +1312,7 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
-enhanced-resolve@^3.0.0, enhanced-resolve@^3.1.0:
+enhanced-resolve@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-3.1.0.tgz#9f4b626f577245edcf4b2ad83d86e17f4f421dec"
   dependencies:
@@ -2104,7 +2092,7 @@ loader-utils@^0.2.16, loader-utils@~0.2.2:
     json5 "^0.5.0"
     object-assign "^4.0.1"
 
-loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -2144,7 +2132,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1:
+lodash@^4.14.0, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2377,7 +2365,7 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -2899,11 +2887,11 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apollo@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-1.1.2.tgz#2f8a8d85306805feda242241e0a4d5864664cf4d"
+react-apollo@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-1.2.0.tgz#4dc3f61bad9b2fe2c450bc7fbd4fab52004de474"
   dependencies:
-    apollo-client "^1.0.2"
+    apollo-client "^1.1.2"
     graphql-anywhere "^3.0.0"
     graphql-tag "^2.0.0"
     hoist-non-react-statics "^1.2.0"
@@ -3153,7 +3141,7 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
-"semver@2 || 3 || 4 || 5", semver@^5.3.0:
+"semver@2 || 3 || 4 || 5", semver@^5.0.1, semver@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
@@ -3275,12 +3263,6 @@ source-map-loader@^0.2.1:
     async "^0.9.0"
     loader-utils "~0.2.2"
     source-map "~0.1.33"
-
-source-map-support@^0.4.15:
-  version "0.4.15"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.15.tgz#03202df65c06d2bd8c7ec2362a193056fef8d3b1"
-  dependencies:
-    source-map "^0.5.6"
 
 source-map-support@^0.4.2:
   version "0.4.14"
@@ -3495,6 +3477,15 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+ts-loader@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-2.0.3.tgz#89b8c87598f048df065766e07e1538f0eaeb1165"
+  dependencies:
+    colors "^1.0.3"
+    enhanced-resolve "^3.0.0"
+    loader-utils "^1.0.2"
+    semver "^5.0.1"
+
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
@@ -3691,9 +3682,9 @@ webpack-sources@^0.2.3:
     source-list-map "^1.1.1"
     source-map "~0.5.3"
 
-webpack@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.5.0.tgz#5a17089f8d0e43442e606d6cf9b2a146c8ed9911"
+webpack@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.5.1.tgz#61742f0cf8af555b87460a9cd8bba2f1e3ee2fce"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
